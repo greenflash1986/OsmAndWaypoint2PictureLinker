@@ -1,0 +1,3 @@
+[submodule "libGpx4J"]
+	path = libGpx4J
+	url = https://github.com/szefred/gpx4j.git

@@ -1,3 +1,3 @@
 //includeFlat 'gpx4j'
 include ':libGpx4J'
-project(':libGpx4J').projectDir = new File('../gpx4j/libGpx4J')
+project(':libGpx4J').projectDir = new File('./libGpx4J/libGpx4J')

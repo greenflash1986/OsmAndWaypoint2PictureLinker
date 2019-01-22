@@ -1,0 +1,58 @@
+apply plugin: 'eclipse'
+
+allprojects {
+	apply plugin: 'java'
+	
+	repositories {
+		mavenCentral()
+	}
+	
+	
+	sourceCompatibility = 1.7
+	targetCompatibility = 1.7
+	
+	configurations {
+		provided
+	}
+
+	//Include provided for compilation
+	//sourceSets.main.compileClasspath += [configurations.provided]
+}
+
+jar {
+	manifest {
+		attributes	'Implementation-Title': name,
+				 	'Implementation-Version': version
+	}
+}
+
+dependencies {
+	compile project(':libGpx4J')
+	compile 'com.sun.xml.bind:jaxb-impl:2.2.3-2'
+	compile 'org.apache.commons:commons-csv:1.1'
+}
+
+eclipse.classpath {
+	file {
+		beforeMerged { classpath -> 
+			def jreEntries = classpath.entries.findAll { entry ->
+				entry.kind.equals('con') &&
+				entry.path.contains('org.eclipse.jdt.launching.JRE_CONTAINER')
+			}
+			classpath.entries.removeAll(jreEntries)
+		}
+	}
+	if (JavaVersion.current() > targetCompatibility) {
+		containers.remove('org.eclipse.jdt.launching.JRE_CONTAINER')
+		containers "org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-$sourceCompatibility"
+	}
+}
+
+
+eclipseJdt {
+	enabled = false
+}
+
+cleanEclipse {
+	delete "${project.rootDir}/bin"
+}

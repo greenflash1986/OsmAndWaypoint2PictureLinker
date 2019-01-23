@@ -1,9 +1,5 @@
 
-https://github.com/szefred/gpx4j.git as subproject
-check for "sourceSets" uncomment again
-fix Build
 apply patch in gradle build
-initial GitCommit
 move to eclipse workspace
 
 Tag Pictures with GPX-Koordinates

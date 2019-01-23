@@ -1,7 +1,6 @@
-apply plugin: 'eclipse'
-
 allprojects {
 	apply plugin: 'java'
+	apply plugin: 'eclipse'
 	
 	repositories {
 		mavenCentral()
@@ -17,6 +16,19 @@ allprojects {
 
 	//Include provided for compilation
 	//sourceSets.main.compileClasspath += [configurations.provided]
+}
+
+project(':libGpx4J') {
+	sourceSets {
+		main {
+			java {
+				srcDir 'src/'
+			}
+		}
+	}
+	dependencies {
+		compile fileTree(dir: 'lib', include: ['*.jar'])
+	}
 }
 
 jar {

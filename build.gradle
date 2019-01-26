@@ -33,11 +33,7 @@ project(':libGpx4J') {
 	}
 	
 	compileJava.doFirst {
-		println "${project.rootProject.rootDir}/lib/0001-convert-GPX-Type-Link-to-accept-string-as-href.patch"
-		println project.projectDir
-		println "${project.projectDir}/.."
-		println "${project.rootDir}"
-		ant.patch(patchfile: "${project.rootProject.rootDir}/lib/0001-convert-GPX-Type-Link-to-accept-string-as-href.patch",
+		ant.patch(patchfile: "${project.rootProject.rootDir}/src/main/patch/make-Link-accept-string.patch",
 			dir: "${project.projectDir}/..", strip: 1)
 	}
 }

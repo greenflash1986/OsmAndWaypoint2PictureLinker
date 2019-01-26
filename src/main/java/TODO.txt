@@ -1,4 +1,3 @@
-
 apply patch in gradle build
 move to eclipse workspace
 

@@ -4,15 +4,15 @@ Date: Fri, 19 Jun 2015 00:50:51 +0200
 Subject: [PATCH] convert GPX-Type Link to accept string as href
 
 ---
- libGpx4J/src/main/java/org/casaca/gpx4j/core/data/Link.java  |  6 +++---
+ libGpx4J/src/org/casaca/gpx4j/core/data/Link.java  |  6 +++---
  .../java/org/casaca/gpx4j/core/driver/jaxb/JaxbAdapter.java  | 10 +++++-----
  .../java/org/casaca/gpx4j/core/driver/jdom/GpxReader.java    | 12 ++++++------
  3 files changed, 14 insertions(+), 14 deletions(-)
 
-diff --git a/libGpx4J/src/main/java/org/casaca/gpx4j/core/data/Link.java b/libGpx4J/src/main/java/org/casaca/gpx4j/core/data/Link.java
+diff --git a/libGpx4J/src/org/casaca/gpx4j/core/data/Link.java b/libGpx4J/src/org/casaca/gpx4j/core/data/Link.java
 index 34ae62d..6c3735e 100644
---- a/libGpx4J/src/main/java/org/casaca/gpx4j/core/data/Link.java
-+++ b/libGpx4J/src/main/java/org/casaca/gpx4j/core/data/Link.java
+--- a/libGpx4J/src/org/casaca/gpx4j/core/data/Link.java
++++ b/libGpx4J/src/org/casaca/gpx4j/core/data/Link.java
 @@ -5,7 +5,7 @@ import java.net.URL;
  public class Link extends BaseObject {
  	private String text;
@@ -35,10 +35,10 @@ index 34ae62d..6c3735e 100644
  		this.href = href;
  	}
  }
-diff --git a/libGpx4J/src/main/java/org/casaca/gpx4j/core/driver/jaxb/JaxbAdapter.java b/libGpx4J/src/main/java/org/casaca/gpx4j/core/driver/jaxb/JaxbAdapter.java
+diff --git a/libGpx4J/src/org/casaca/gpx4j/core/driver/jaxb/JaxbAdapter.java b/libGpx4J/src/org/casaca/gpx4j/core/driver/jaxb/JaxbAdapter.java
 index 5dbd11e..e13e041 100644
---- a/libGpx4J/src/main/java/org/casaca/gpx4j/core/driver/jaxb/JaxbAdapter.java
-+++ b/libGpx4J/src/main/java/org/casaca/gpx4j/core/driver/jaxb/JaxbAdapter.java
+--- a/libGpx4J/src/org/casaca/gpx4j/core/driver/jaxb/JaxbAdapter.java
++++ b/libGpx4J/src/org/casaca/gpx4j/core/driver/jaxb/JaxbAdapter.java
 @@ -241,14 +241,14 @@ public class JaxbAdapter implements IGpxAdapter {
  		
  		LinkType lType = (LinkType)link;
@@ -59,10 +59,10 @@ index 5dbd11e..e13e041 100644
  	}
  
  	@Override
-diff --git a/libGpx4J/src/main/java/org/casaca/gpx4j/core/driver/jdom/GpxReader.java b/libGpx4J/src/main/java/org/casaca/gpx4j/core/driver/jdom/GpxReader.java
+diff --git a/libGpx4J/src/org/casaca/gpx4j/core/driver/jdom/GpxReader.java b/libGpx4J/src/org/casaca/gpx4j/core/driver/jdom/GpxReader.java
 index bf125b4..693f4f4 100644
---- a/libGpx4J/src/main/java/org/casaca/gpx4j/core/driver/jdom/GpxReader.java
-+++ b/libGpx4J/src/main/java/org/casaca/gpx4j/core/driver/jdom/GpxReader.java
+--- a/libGpx4J/src/org/casaca/gpx4j/core/driver/jdom/GpxReader.java
++++ b/libGpx4J/src/org/casaca/gpx4j/core/driver/jdom/GpxReader.java
 @@ -602,12 +602,12 @@ public class GpxReader implements IGpxReader {
  			
  			String url = element.getAttributeValue(this.tags.getProperty(Constants.TAG_LINK_HREF));

@@ -1,5 +1,3 @@
-move to eclipse workspace
-
 Tag Pictures with GPX-Koordinates
 
 Add Link and Folderstructure for OsmAnd

@@ -38,6 +38,27 @@ project(':libGpx4J') {
 	}
 }
 
+task downloadAndExtractExiftool(type: Copy) {
+	def f = file('lib/exiftool.exe')
+	
+	def zipFile = file('lib/exiftool.zip')
+	def outputDir = file('lib')
+	if (!f.exists()) {
+		new URL('https://netcologne.dl.sourceforge.net/project/exiftool/exiftool-11.26.zip')
+			.withInputStream{ i -> zipFile.withOutputStream{ it << i }}
+		
+		from zipTree(zipFile)
+		into outputDir
+		rename '.*', 'exiftool.exe'
+		
+	}
+	doLast {
+		zipFile.delete()
+	}
+}
+
+assemble.dependsOn downloadAndExtractExiftool
+
 jar {
 	manifest {
 		attributes	'Implementation-Title': name,
@@ -55,15 +76,11 @@ eclipse.classpath {
 	file {
 		beforeMerged { classpath -> 
 			def jreEntries = classpath.entries.findAll { entry ->
-				entry.kind.equals('con') &&
+				entry.kind.equals('Container') &&
 				entry.path.contains('org.eclipse.jdt.launching.JRE_CONTAINER')
 			}
 			classpath.entries.removeAll(jreEntries)
 		}
-	}
-	if (JavaVersion.current() > targetCompatibility) {
-		containers.remove('org.eclipse.jdt.launching.JRE_CONTAINER')
-		containers "org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-$sourceCompatibility"
 	}
 }
 

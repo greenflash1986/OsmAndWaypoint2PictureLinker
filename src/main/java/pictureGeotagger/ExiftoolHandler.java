@@ -22,7 +22,7 @@ public class ExiftoolHandler {
 
 	public ExiftoolHandler(File workingDir) {
 		lines.add(new String[] { "SourceFile", "GPSLatitude", "GPSLatitudeRef", "GPSLongitude", "GPSLongitudeRef",
-				"GPSAltitude", "GPSAltitudeRef", "headline",
+				"GPSAltitude", "GPSAltitudeRef", 
 				"desc", "IPTC:CodedCharacterSet" });
 		DecimalFormatSymbols otherSymbols = new DecimalFormatSymbols(Locale.getDefault());
 		otherSymbols.setDecimalSeparator('.');
@@ -32,7 +32,6 @@ public class ExiftoolHandler {
 	}
 
 	public void addPictureToTag(String filenamePic, BigDecimal latitude, BigDecimal longitude, BigDecimal elevation,
-			String headline,
 			String desc) {
 		String lat = coordFormat.format(latitude);
 		String latRef = latitude.signum() == -1 ? "S" : "N";
@@ -44,7 +43,7 @@ public class ExiftoolHandler {
 			ele = coordFormat.format(elevation);
 			eleRef = "Above";
 		}
-		lines.add(new String[] { filenamePic, lat, latRef, lon, lonRef, ele, eleRef, headline, desc });
+		lines.add(new String[] { filenamePic, lat, latRef, lon, lonRef, ele, eleRef, desc });
 	}
 
 	private File writeCsv() throws UnsupportedEncodingException, IOException {

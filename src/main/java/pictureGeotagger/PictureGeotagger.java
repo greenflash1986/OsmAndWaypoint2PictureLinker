@@ -89,12 +89,12 @@ public class PictureGeotagger {
 				int i = 0;
 				picturesToAdd.clear();
 				while (i < pictures.size()) {
-					if (pictures.get(i).split("_|\\.jpg")[1].equalsIgnoreCase(wpt.getName())) {
+					if (pictures.get(i).split("_|\\.jpg")[0].equalsIgnoreCase(wpt.getName())) {
 						// geotagPicture(exifToolPath, folder, pictures.get(i), wpt.getLatitude(), wpt.getLongitude(),
 						// wpt.getElevation(),
 						// wpt.getDescription());
 						exifTool.addPictureToTag(pictures.get(i), wpt.getLatitude(), wpt.getLongitude(), wpt.getElevation(),
-								wpt.getName(), wpt.getDescription());
+								wpt.getName());
 
 						++picCnt;
 						found = true;

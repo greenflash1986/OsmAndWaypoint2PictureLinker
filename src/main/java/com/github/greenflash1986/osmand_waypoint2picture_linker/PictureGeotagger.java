@@ -34,12 +34,10 @@ public class PictureGeotagger {
 		JFileChooser fChooser = new JFileChooser();
 		fChooser.setDialogTitle("Please select the waypoint file");
 		fChooser.setFileFilter(new FileNameExtensionFilter("GPX waypoint file", "gpx"));
-		// int returnVal = fChooser.showOpenDialog(null);
-		int returnVal = JFileChooser.APPROVE_OPTION;
+		int returnVal = fChooser.showOpenDialog(null);
 
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
-			// List<Waypoint> wpts = readWaypoints(fChooser.getSelectedFile());
-			List<Waypoint> wpts = readWaypoints(new File("C:\\Users\\GreenFlash1986\\Desktop\\Boofen\\BOOFENLISTE.GPX"));
+			List<Waypoint> wpts = readWaypoints(fChooser.getSelectedFile());
 			for (int i = 0; i < wpts.size(); ++i) { // first check, that every name is different
 				for (int j = i + 1; j < wpts.size(); ++j) {
 					if (wpts.get(i).getName().equalsIgnoreCase(wpts.get(j).getName())) {
@@ -52,14 +50,12 @@ public class PictureGeotagger {
 			fChooser.setDialogTitle("Please select the folder with the correlative pictures");
 			fChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 			fChooser.setAcceptAllFileFilterUsed(false);
-			// returnVal = fChooser.showOpenDialog(null);
-			returnVal = JFileChooser.APPROVE_OPTION;
+			returnVal = fChooser.showOpenDialog(null);
 			if (returnVal != JFileChooser.APPROVE_OPTION) {
 				return;
 			}
 
-			// File folder = fChooser.getSelectedFile();
-			File folder = new File("C:\\Users\\GreenFlash1986\\Desktop\\Boofen");
+			File folder = fChooser.getSelectedFile();
 			List<String> pictures = new ArrayList<String>(Arrays.asList(folder.list(new FilenameFilter() {
 				@Override
 				public boolean accept(File dir, String name) {
@@ -73,12 +69,11 @@ public class PictureGeotagger {
 
 			fChooser.setDialogTitle("Please select the folder for the output for osmand");
 
-			// if (fChooser.showOpenDialog(null) != JFileChooser.APPROVE_OPTION) {
-			// return;
-			// }
+			if (fChooser.showOpenDialog(null) != JFileChooser.APPROVE_OPTION) {
+				return;
+			}
 
-			// OsmAndHandler osmAnd = new OsmAndHandler(fChooser.getSelectedFile());
-			OsmAndHandler osmAnd = new OsmAndHandler(new File("C:\\Users\\GreenFlash1986\\Desktop\\Test"));
+			OsmAndHandler osmAnd = new OsmAndHandler(fChooser.getSelectedFile());
 
 			String exifToolPath = System.getProperty("user.dir") + "\\lib\\exiftool";
 			int picCnt = 0;

@@ -1,4 +1,4 @@
-package pictureGeotagger;
+package com.github.greenflash1986.osmand_waypoint2picture_linker;
 
 import java.io.File;
 import java.io.FilenameFilter;

@@ -16,22 +16,26 @@ allprojects {
 
 	//Include provided for compilation
 	//sourceSets.main.compileClasspath += [configurations.provided]
-}
-
-project(':libGpx4J') {
-	sourceSets {
-		main {
-			java {
-				srcDir 'src/'
+	
+	eclipse.classpath {
+		file {
+			beforeMerged { classpath -> 
+				def jreEntries = classpath.entries.findAll { entry ->
+					//entry.kind.equals('con') &&
+					entry.path.contains('org.eclipse.jdt.launching.JRE_CONTAINER')
+				}
+				classpath.entries.removeAll(jreEntries)
 			}
 		}
 	}
 	
 	
-	dependencies {
-		compile fileTree(dir: 'lib', include: ['*.jar'])
+	eclipseJdt {
+		enabled = false
 	}
-	
+}
+
+project(':libGpx4J') {
 	compileJava.doFirst {
 		ant.patch(patchfile: "${project.rootProject.rootDir}/src/main/patch/make-Link-accept-string.patch",
 			dir: "${project.projectDir}/..", strip: 1)
@@ -70,23 +74,6 @@ dependencies {
 	compile project(':libGpx4J')
 	compile 'com.sun.xml.bind:jaxb-impl:2.2.3-2'
 	compile 'org.apache.commons:commons-csv:1.1'
-}
-
-eclipse.classpath {
-	file {
-		beforeMerged { classpath -> 
-			def jreEntries = classpath.entries.findAll { entry ->
-				entry.kind.equals('Container') &&
-				entry.path.contains('org.eclipse.jdt.launching.JRE_CONTAINER')
-			}
-			classpath.entries.removeAll(jreEntries)
-		}
-	}
-}
-
-
-eclipseJdt {
-	enabled = false
 }
 
 cleanEclipse {

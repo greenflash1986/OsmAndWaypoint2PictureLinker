@@ -1,4 +1,4 @@
 [submodule "libGpx4J"]
 	path = libGpx4J
-	url = https://github.com/szefred/gpx4j.git
+	url = https://github.com/greenflash1986/gpx4j.git
 	ignore = dirty
